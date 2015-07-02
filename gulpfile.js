@@ -15,6 +15,7 @@ var express = require('express');
 var browserSync = require('browser-sync');
 var minimist = require('minimist');
 var runSequence = require('run-sequence');
+var del = require('del');
 
 var server;
 var options = minimist(process.argv);
@@ -61,11 +62,11 @@ gulp.task('server', function() {
 	browserSync({ proxy: 'localhost:8000' });
 });
 
-gulp.task('cache-bust', ['images', 'styles', 'scripts']);
-
-gulp.task('build', function() {
-	runSequence('cache-bust', 'html');
+gulp.task('build', function(done) {
+	runSequence(['images', 'styles', 'scripts'], 'html', done);
 });
+
+gulp.task('clean', del.bind(null, ['dist/*', '!dist/.git'], {dot: true}));
 
 gulp.task('watch', function() {
 	gulp.watch('src/html/**/*.html', ['html']);
@@ -75,11 +76,14 @@ gulp.task('watch', function() {
 });
 
 // When you are working on this app, you will want to do three things:
-// 
-// 1. Build your project
-// 2. Watch for changes
-// 3. Start your development server
-gulp.task('default', ['build', 'watch', 'server']);
+//
+// 1. Clean your project
+// 2. Build your project
+// 3. Watch for changes
+// 4. Start your development server
+gulp.task('default', ['clean'], function(cb) {
+  runSequence(['build', 'watch', 'server'], cb);
+});
 
 function handleError(err) {
 	console.log(err.toString());
