@@ -2,17 +2,19 @@
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var express = require('express');
-var browserSync = require('browser-sync');
 var gutil = require('gulp-util');
-var minimist = require('minimist');
 var minifyCss = require('gulp-minify-css');
 var buffer = require('gulp-buffer');
 var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
 var CacheBuster = require('gulp-cachebust');
+
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var express = require('express');
+var browserSync = require('browser-sync');
+var minimist = require('minimist');
+var runSequence = require('run-sequence');
 
 var server;
 var options = minimist(process.argv);
@@ -59,7 +61,11 @@ gulp.task('server', function() {
 	browserSync({ proxy: 'localhost:8000' });
 });
 
-gulp.task('build', ['html', 'images', 'styles', 'scripts']);
+gulp.task('cache-bust', ['images', 'styles', 'scripts']);
+
+gulp.task('build', function() {
+	runSequence('cache-bust', 'html');
+});
 
 gulp.task('watch', function() {
 	gulp.watch('src/html/**/*.html', ['html']);
