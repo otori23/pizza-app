@@ -1,0 +1,38 @@
+{
+  "name": "pizza-app",
+  "version": "1.0.0",
+  "description": "A sample pizza application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otori23/pizza-app.git"
+  },
+  "author": "Azeez Otori",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otori23/pizza-app/issues"
+  },
+  "homepage": "https://github.com/otori23/pizza-app#readme",
+  "devDependencies": {
+    "browser-sync": "^2.7.13",
+    "browserify": "^10.2.4",
+    "express": "^4.13.0",
+    "gulp": "^3.9.0",
+    "gulp-buffer": "0.0.2",
+    "gulp-cachebust": "0.0.5",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-minify-css": "^1.2.0",
+    "gulp-sass": "^2.0.3",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.6",
+    "minimist": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "handlebars": "^3.0.3",
+    "jquery": "^2.1.4"
+  }
+}
