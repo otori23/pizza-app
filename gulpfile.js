@@ -21,6 +21,7 @@ var cachebust = new CacheBuster({ checksunLength: 32 });
 
 gulp.task('html', function () {
 	return gulp.src('src/html/**/*.html')
+		.pipe(cachebust.references())
 		.pipe(gulp.dest('dist'))
 		.pipe(reload());
 });
