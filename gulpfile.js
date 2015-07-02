@@ -28,6 +28,7 @@ gulp.task('html', function () {
 gulp.task('images', function () {
 	return gulp.src('src/images/**/*.png')
 		.pipe(imagemin())
+		.pipe(cachebust.resources())
 		.pipe(gulp.dest('dist'))
 		.pipe(reload());
 });
